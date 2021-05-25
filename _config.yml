@@ -23,9 +23,10 @@ author:
     name: Snigdho Chakraborty
     email: snigdho.chakraborty@gmail.com
 description: >- # this means to ignore newlines until "baseurl:"
-  This website is dedicated to all those enthusiastic young minds that like to learn about
-  particle physics, but feel lost. I target a wide range of students and educationists to provide them with an easy access to 
-  knowledge :)
+  Through this website I target a wide range of audience in order to provide them with an easy access to key concepts, tools and interpretations in Nuclear and Particle Physics.
+  Such concepts play an important role in Research, but are generally not discussed in any university level courses, or books. I try to articulate these fundamental 
+  stuff that I learn from recent research articles, with stuff that we are regularly taught in undergraduate and post-graduate courses. This website in a way is to inspire others
+  and motivate them towards Science and Research in Particle Physics:)
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "" # the base hostname & protocol for your site, e.g. http://snigdhos.com
 #github_username:  snigdhochakraborty
