@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Jet Reconstruction | Physicophilia</title>
+<meta name="generator" content="Jekyll v4.2.0" />
+<meta property="og:title" content="Jet Reconstruction" />
+<meta name="author" content="Snigdho Chakraborty" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="This is the Data pipeline of CERN. All the data collected from the four major detectors ATLAS, CMS, ALICE and LHCb first undergo an online event selection, before being stored. This raw data enters into the jet reconstruction process, where these are converted into analytically more useful information. This is kind of an offline selection to the data. This data then is ready to be analysed for the search and validations to be performed by the physicists. In this blog post I intend to draw a rough picture of the reconstruction of jets as performed by ATLAS and CMS, with slight bias on algorithms used by ATLAS. However, the general procedure is almost the same in both of these collaborations. Before getting into jet reconstruction, it is important to understand, what are jets ? Jets are actually ‘tools’ that represent hadronic showers in a detector. They are not real objects, rather represent hadronization of quarks and gluons. We classify jets as: Small R jets: These are jets with R=0.4. They originate from quarks and gluons.Large R jets: These are jets with R=1.0 for ATLAS and 0.8 for CMS. They originate from more complex objects such as hadronically decaying W/Z bosons, or top quark, etc." />
+<meta property="og:description" content="This is the Data pipeline of CERN. All the data collected from the four major detectors ATLAS, CMS, ALICE and LHCb first undergo an online event selection, before being stored. This raw data enters into the jet reconstruction process, where these are converted into analytically more useful information. This is kind of an offline selection to the data. This data then is ready to be analysed for the search and validations to be performed by the physicists. In this blog post I intend to draw a rough picture of the reconstruction of jets as performed by ATLAS and CMS, with slight bias on algorithms used by ATLAS. However, the general procedure is almost the same in both of these collaborations. Before getting into jet reconstruction, it is important to understand, what are jets ? Jets are actually ‘tools’ that represent hadronic showers in a detector. They are not real objects, rather represent hadronization of quarks and gluons. We classify jets as: Small R jets: These are jets with R=0.4. They originate from quarks and gluons.Large R jets: These are jets with R=1.0 for ATLAS and 0.8 for CMS. They originate from more complex objects such as hadronically decaying W/Z bosons, or top quark, etc." />
+<link rel="canonical" href="/jet_reco/" />
+<meta property="og:url" content="/jet_reco/" />
+<meta property="og:site_name" content="Physicophilia" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-03-15T10:48:59+05:30" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Jet Reconstruction" />
+<script type="application/ld+json">
+{"@type":"BlogPosting","headline":"Jet Reconstruction","dateModified":"2021-03-15T10:48:59+05:30","datePublished":"2021-03-15T10:48:59+05:30","url":"/jet_reco/","author":{"@type":"Person","name":"Snigdho Chakraborty"},"mainEntityOfPage":{"@type":"WebPage","@id":"/jet_reco/"},"description":"This is the Data pipeline of CERN. All the data collected from the four major detectors ATLAS, CMS, ALICE and LHCb first undergo an online event selection, before being stored. This raw data enters into the jet reconstruction process, where these are converted into analytically more useful information. This is kind of an offline selection to the data. This data then is ready to be analysed for the search and validations to be performed by the physicists. In this blog post I intend to draw a rough picture of the reconstruction of jets as performed by ATLAS and CMS, with slight bias on algorithms used by ATLAS. However, the general procedure is almost the same in both of these collaborations. Before getting into jet reconstruction, it is important to understand, what are jets ? Jets are actually ‘tools’ that represent hadronic showers in a detector. They are not real objects, rather represent hadronization of quarks and gluons. We classify jets as: Small R jets: These are jets with R=0.4. They originate from quarks and gluons.Large R jets: These are jets with R=1.0 for ATLAS and 0.8 for CMS. They originate from more complex objects such as hadronically decaying W/Z bosons, or top quark, etc.","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="/feed.xml" title="Physicophilia" />
+</head>
+<body style="background-color:WhiteSmoke"><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">Physicophilia</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/about/" style="color:OrangeRed; font-weight:bold">About</a><a class="page-link" href="/partphy/" style="color:OrangeRed; font-weight:bold">Particle Physics</a><a class="page-link" href="/qft/" style="color:OrangeRed; font-weight:bold">Quantum Field Theory</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Jet Reconstruction</h1>
+    <p class="post-meta"><time class="dt-published" datetime="2021-03-15T10:48:59+05:30" itemprop="datePublished">
+        Mar 15, 2021
+      </time></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p>This is the Data pipeline of CERN. All the data collected from the four major detectors ATLAS, CMS, ALICE and LHCb first undergo an online event selection, before being stored.
+This raw data enters into the jet reconstruction process, where these are converted into analytically more useful information. This is kind of an offline selection to the data. 
+This data then is ready to be analysed for the search and validations to be performed by the physicists.<br />
+<img src="https://alookanalytics.files.wordpress.com/2018/10/cern_swan.png?w=600" />
+<br /><br />
+In this blog post I intend to draw a rough picture of the reconstruction of jets as performed by ATLAS and CMS, with slight bias on algorithms used by ATLAS. However, the general
+procedure is almost the same in both of these collaborations. Before getting into jet reconstruction, it is important to understand, what are <a href="https://en.wikipedia.org/wiki/Jet_(particle_physics)">jets</a> ? Jets are actually ‘tools’ that 
+represent hadronic showers in a detector. They are not real objects, rather represent hadronization of quarks and gluons. We classify jets as:</p>
+<ul><li><b>Small R jets:</b> These are jets with R=0.4. They originate from quarks and gluons.</li><li><b>Large R jets:</b> These are jets with R=1.0 for ATLAS and 0.8
+for CMS. They originate from more complex objects such as hadronically decaying W/Z bosons, or top quark, etc.</li></ul>
+
+<p><br /><br /></p>
+<h3>Basic Steps of Jet Reconstruction</h3>
+<p>The process of jet reconstruction somewhat varies to a definite degree for different collaborations. But the underlying processes are almost always the same. As specified before,
+this page has a bias on the method followed by ATLAS Collaboration. 
+<br /></p>
+<h4><b>Understanding Detector and Pileup</b></h4>
+<p><br />
+<img align="left" src="https://stanford.edu/group/stanford_atlas/pictures/collision/detector.jpg" alt="drawing" style="width:695px;" /><br />
+<br />Before we move on to the section of Pileup Mitigation, it is important to understant our detector structure.<br />
+The ATLAS detector provides nearly full solid angle coverage around the collision point with an inner tracking system covering the pseudorapidity1 range <math xmlns="http://www.w3.org/1998/Math/MathML"><mrow class="MJX-TeXAtom-ORD"><mo stretchy="false">|</mo></mrow><mi>&#x03B7;<!-- η --></mi><mrow class="MJX-TeXAtom-ORD"><mo stretchy="false">|</mo></mrow><mo>&lt;</mo><mn>2.5</mn></math>, electromagnetic (EM) and hadronic calorimeters
+covering <math xmlns="http://www.w3.org/1998/Math/MathML"><mrow class="MJX-TeXAtom-ORD"><mo stretchy="false">|</mo></mrow><mi>&#x03B7;<!-- η --></mi><mrow class="MJX-TeXAtom-ORD"><mo stretchy="false">|</mo></mrow><mo>&lt;</mo><mn>4.9</mn></math>, and a muon spectrometer covering <math xmlns="http://www.w3.org/1998/Math/MathML"><mrow class="MJX-TeXAtom-ORD"><mo stretchy="false">|</mo></mrow><mi>&#x03B7;<!-- η --></mi><mrow class="MJX-TeXAtom-ORD"><mo stretchy="false">|</mo></mrow><mo>&lt;</mo><mn>2.7</mn></math>.
+<br /><br />The ATLAS <b>tracking system</b> is composed of a silicon pixel tracker closest to the beamline, a microstrip silicon tracker, and a straw-tube transition radiation tracker. These systems are layered radially around each other in the central region. A thin solenoid surrounding the tracker provides an axial 2T field enabling measurement of charged-particle momenta.
+<br /> The calorimeter is comprised of multiple subdetectors with different designs. The high granularity liquid argon (LAr) <b>electromagnetic calorimeter</b> system includes 
+separate barrel, endcap, and forward subsystems. The tile <b>hadronic calorimeter</b> is composed of scintillator tiles and iron absorbers. The final layer is a <b>toroid muon 
+spectrometer (MS)</b> that tracks muons. Generally, we use jets having  <math xmlns="http://www.w3.org/1998/Math/MathML"><mrow class="MJX-TeXAtom-ORD"><mo stretchy="false">|</mo></mrow><mi>&#x03B7;<!-- η --></mi><mrow class="MJX-TeXAtom-ORD"><mo stretchy="false">|</mo></mrow><mo>&lt;</mo><mn>2.8</mn></math> such that they are fully contained within 
+the barrel and endcap calorimeter systems.
+<br /><br /> Now, once we are done with understanding detetctor structure of ATLAS, we’ll head towards what is pileup, and how do we get rid of them. There are many 
+p-p collisions taking place simultaneously, and within small interval of time at the Large Hadron Collider, so as to get more and more data. But multiple interactions 
+in the same bunch crossings, and multiple bunch crossings within small time interval increases pileup. Pile-up contributes to the detector signals from the 
+collision environment, and is especially important for higher-intensity operations of the LHC. The figure below represents a typical LHC event. Each blob that we see is a reconstructed
+primary vertex (‘point of collision of two protons’). However each of them is not a hard scatter (deep inelastic collisions with high energy) vertex. <br /><br />
+<img align="left" src="/assets/images/2.png" alt="drawing" style="width:800px;" /><br />Hence, pileup can be of two major types:</p>
+<ul><li><b>In Time pileup (IT):</b> This contribution arises from the additional proton–proton (pp) collisions occurring in the same bunch crossing as the hard-scatter interaction (deep inelastic collisions with high energy).</li>
+<li><b>Out Of Time pileup (OOT):</b> This is the pile-up from signal remnants in the ATLAS calorimeters from the energy deposits in other bunch crossings.</li>
+</ul>
+<p>While pileup directly cannot be measured, it can be correlated to many directly measurable quantities, such as <b>average number of collisions per bunch crossing (<math xmlns="http://www.w3.org/1998/Math/MathML"><mi>&#x03BC;<!-- μ --></mi></math>)</b>, or 
+<b>The observed number of collisions in a single event (<math xmlns="http://www.w3.org/1998/Math/MathML"><mi>N</mi><msub><mrow class="MJX-TeXAtom-ORD"><mi>P</mi><mi>V</mi></mrow></msub></math>)</b>, also known as Number of primary Vertices.
+Since in time pileup arise from simultaneous collisions in one buch crossing, NPV can be thought as a measure of IT. On the other hand Out of time pileups arise from 
+remenants of signal in subsequent or previous collisions, <math xmlns="http://www.w3.org/1998/Math/MathML"><mi>&#x03BC;<!-- μ --></mi></math> can be thought of as a measure of OOT pileup. Now, at this point a question might bug us that
+why should previous/subsequent collisions matter? It is if detector readout time is larger than the space between subsequent bunch crossings, previous, or subsequent events can overlap with current events
+, hence giving a wrong reconstruction. Generally, calorimeters have a longer readout, but the tracking systems have a shorter readout time. <br /><br /></p>
+
+<p><br /></p>
+<h4><b>Building inputs to jet Reconstruction</b></h4>
+<p>So, in a detector, jets are a complex mixture of visible signals. Individual charged particles (which comprise of ~2/3 rd of the jets) appear in the tracker, wheras Charged and neutral particles (~1/3rd of the jets) appear together (but not distinguishable) in the calorimeter.
+So, calorimeter energy deposit is the key to jet reconstruction. But the calorimeter is succeptible to a lot of pileup as we saw previously. So, the we need to design some calorimeter objects
+in order to  reduce pileup effects, within limits.
+<br /><br />
+<img align="right" src="/assets/images/topo.png" alt="drawing" style="border:1px solid black;" width="300" />
+Clusters of calorimeter energy are classic objects for Jet  Reconstruction! The lateral and longitudinal segmentation of the calorimeters permits three-dimensional reconstruction 
+of particle showers, implemented in the topological clustering algorithm. Topo-clusters of calorimeter cells are seeded by cells whose absolute energy measurements |E| exceed 
+the expected noise (the expected noise includes both electronic noise and the average contribution from pile-up, which depends on the run 
+conditions)by four times its standard deviation. The topo-clusters are then expanded both laterally and longitudinally in two steps, first by iteratively adding all adjacent cells with absolute energies two standard 
+deviations above noise, and finally adding all cells neighbouring the previous set, just to catch the tail of the distributions. FOrmation of calorimeter topocluster reduces pileup
+to certain dergree. Nonetheless, pileup still impacts clusters. Eg: If pileup and hard scatter directly overlap, their energies are combined, changing the measured cluster energy. Also
+pileup can create separate topoclusters. <br />
+So, what about tracks? Do they give us proper jet reconstruction? Althought tracks are “inherently” pileup stable, tracks give an idea about only ~2/3rd
+of the jet energy. The other thing is that tracks can give precise idea about energy and momentum of a charged particle only at low p<sub>T</sub>. This is because, 
+at high p<sub>T</sub>, the ability to measure track curvature degrades. On the other hand, Calorimeters are sensitive to high energy deposits, and relatively insensitive to low energy deposits.
+<br />Hence, neither tracks, nor calo clusters can form a good reconstruction object. So, we combine the information from both these to reconnstruct our jets. We can thus consider mixtures of tracks and calorimeter clusters.
+This requires matching tracks to clusters so we don’t double-count energy. Once we have matched track(s) to a cluster, we check if their measurements are consistent. If they are consistent, the cluster likely corresponds to only charged particle(s)
+, else the cluster likely corresponds to overlapping charged and neutral particles. This process is typically called <b>“particle flow” or (PFlow)</b>. Once again particle 
+flow is very detector-specifc, and each collaboration has their own algorithm, but the general idea and approach follows the above mentality. The figure below beautifully illustrates 
+the way the PFlow algorithm works.
+<br /><br />
+<img src="/assets/images/PFlow.png" alt="drawing" style="border:2px solid black;" /></p>
+
+  </div><a class="u-url" href="/jet_reco/" hidden></a>
+  
+  <div class="PageNavigation">
+  
+  
+    <a class="next" href="/atlas_blogs/">Supersymmetry in ATLAS &raquo;</a>
+  
+</div>
+
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col">
+        <p class="feed-subscribe">
+          <a href="/feed.xml">
+            <svg class="svg-icon orange">
+              <use xlink:href="/assets/minima-social-icons.svg#rss"></use>
+            </svg><span>Subscribe</span>
+          </a>
+        </p>
+        <ul class="contact-list">
+          <li class="p-name">Snigdho Chakraborty</li>
+          <li><a class="u-email" href="mailto:snigdho.chakraborty@gmail.com">snigdho.chakraborty@gmail.com</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <p>This website is dedicated to all those enthusiastic young minds that like to learn about particle physics, but feel lost. I target a wide range of students and educationists to provide them with an easy access to  knowledge :)</p>
+      </div>
+    </div>
+
+    <div class="social-links"><ul class="social-media-list"></ul>
+</div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

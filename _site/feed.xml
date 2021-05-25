@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.0">Jekyll</generator><link href="/feed.xml" rel="self" type="application/atom+xml" /><link href="/" rel="alternate" type="text/html" /><updated>2021-05-26T00:12:41+05:30</updated><id>/feed.xml</id><title type="html">Physicophilia</title><subtitle>This website is dedicated to all those enthusiastic young minds that like to learn about particle physics, but feel lost. I target a wide range of students and educationists to provide them with an easy access to  knowledge :)</subtitle><author><name>Snigdho Chakraborty</name><email>snigdho.chakraborty@gmail.com</email></author><entry><title type="html">Supersymmetry in ATLAS</title><link href="/atlas_blogs/" rel="alternate" type="text/html" title="Supersymmetry in ATLAS" /><published>2021-05-22T10:48:59+05:30</published><updated>2021-05-22T10:48:59+05:30</updated><id>/ATLAS</id><content type="html" xml:base="/atlas_blogs/">&lt;h3&gt;My journey to ATLAS-2021&lt;/h3&gt;
+&lt;p&gt;Getting an internship in ATLAS, one of the 4 major sub-detectors of the Large Hadron collider (LHC), CERN was like a dream come true. The year of 2020, I applied for a project position
+at the University of Geneva for the summer of 2021, and fortunately got selected! I started my work from the December of 2020.&lt;/p&gt;
+&lt;p&gt;In this section I'll keep appending basically all of the &lt;b&gt;Analysis&lt;/b&gt; techniques and methods I learn and perform for the entire duration of the project :)&lt;/p&gt;
+
+&lt;h3&gt;R-Parity Violation Supersymmetry Analysis in ATLAS&lt;/h3&gt;
+&lt;p&gt;I have discussed about Supersymmetry in the &lt;a href=&quot;http://127.0.0.1:4000/partphy/&quot;&gt;&lt;b&gt;Particle Physics&lt;/b&gt;&lt;/a&gt; section! Here I’ll discuss about R-parity violation coupling and the analysis work
+and strategies that I am learning and following for this ATLAS project of 2020-2021.&lt;/p&gt;
+
+&lt;h4&gt;The signal model&lt;/h4&gt;
+&lt;p&gt;&lt;img align=&quot;left&quot; src=&quot;/assets/images/fig_01a-1.png&quot; alt=&quot;drawing&quot; style=&quot;width:200px;&quot; /&gt; This is our signal model, also known as the 6-jet model. The feynman diagram adjoining clearly specifies that there is a 
+gluino pair production via R-parity conservation coupling, since a Standard model particle must have produced a pair of SUSY particle. Each of these gluinos now decay into a three quarks via &lt;b&gt;R-paity 
+violation coupling&lt;/b&gt;. So, in each event, there are six quarks produced, that hadronize to produce &lt;a href=&quot;https://en.wikipedia.org/wiki/Jet_(particle_physics)&quot;&gt;jets&lt;/a&gt; (which are basically spray of particles that hit the detector).&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h4&gt;Why did we traget gluino pair production? &lt;/h4&gt;
+&lt;p&gt;&lt;img align=&quot;right&quot; src=&quot;/assets/images/gg.jpg&quot; alt=&quot;drawing&quot; style=&quot;width:300px;&quot; /&gt; Production cross-sections (which can be considered as a ‘measure’ of probability that the process shall occur)
+at the LHC are shown in the adjoining figure as a function of the sparticle mass. As expected the pair production of gluinos dominates the SUSY production for a given mass
+scale, followed by the production of squarks, elecroweakinos, sleptons, and sneutrinos. This is exactly why we target gluino pair production. The fist signatures of SUSY is more probable to show up
+via gluino pair production.&lt;/p&gt;
+&lt;p&gt; A valid question to ask is &lt;b&gt;why didn't we observe a SUSY event so far?&lt;/b&gt; The answer to this is, lack of statistics! Supersymmetry processes are very rare, they occur with
+much lower crossection than the Standard Model processes, hence small statistics ensures masking of the signal (in our case any SUSY process) by the much more probable background processes (the Standard Model Processes).&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;h4&gt;Backgrounds for our signal model?&lt;/h4&gt;
+&lt;p&gt;Our signal model concerns Gluino pair production decaying via R-parity violation coupling in all hadronic final states. So, the background must contain those processes that have all hadronic final states too.
+The first and the most important background for this is: &lt;b&gt;QCD Multijet Background&lt;/b&gt;, since at a hadron collider the production of multijets through QCD interaction is the highest cross-section SM process.
+The other fairy important backgrounds involve &lt;math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;&gt;&lt;mi&gt;t&lt;/mi&gt;&lt;mrow class=&quot;MJX-TeXAtom-ORD&quot;&gt;&lt;mover&gt;&lt;mi&gt;t&lt;/mi&gt;&lt;mo stretchy=&quot;false&quot;&gt;&amp;#x00AF;&lt;!-- ¯ --&gt;&lt;/mo&gt;&lt;/mover&gt;&lt;/mrow&gt;&lt;/math&gt; events, single top, and W/Z + jets.&lt;/p&gt;
+
+&lt;p&gt;When we model a background we generally rely on Monte Carlo simulations. But with QCD it is harder, because the processes have huge cross sections so no matter how much CPU we put at work to simulate the events, we almost always end up with too few 
+good events to do a proper modeling job. But this is not the case for other major backgrounds, like the once discussed above. So how do we go with modelling our QCD background?&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;h4&gt;Data Driven Background Estimation&lt;/h4&gt;
+&lt;p&gt;One solution to the problem that I raised in the previous section is what is popularly known as &lt;b&gt;“Data Driven Background Estimation”&lt;/b&gt;. What this means is that we estimate the background
+from the data itself, without relying on our Monte Carlo. Now at first it might seem to be very weird, as in how do we know if our data contains signal or not alongside backgroud? The answer to this is quite simple. We define three main regions in our data,
+the control region, the validation region, and the signal region. What we do is basically define the control region such that the probability of finding the signal there is negligibly small, so this region is ‘devoid’ of signal, and contains mainly the background. We extrapolate this
+‘background yield’ into our signal region and this gives us the background estimate there! But the process isn’t as easy as it seems. The calculation and estimation of the extrapolating factor in this case is quite a job. In some cases
+this factor is derived from Monte Carlo, while in others its derived from the data itself. The former is not a fully ‘data driven process’ and depends on our Monte Carlo parameters, while the later is a completely data driven and a ‘better method’ for background estimation.&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;h4&gt;Updates from recent ATLAS and CMS on data driven methods&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;Jet Counting Method&lt;/li&gt;
+&lt;li&gt;Jet Mass Template Method&lt;/li&gt;
+&lt;li&gt;Two Hemisphere Method&lt;/li&gt;
+&lt;li&gt;Jet Mass Spectrum Method&lt;/li&gt;
+&lt;/ul&gt;</content><author><name>Snigdho Chakraborty</name><email>snigdho.chakraborty@gmail.com</email></author><category term="ATLAS" /><category term="blogs" /><summary type="html">My journey to ATLAS-2021 Getting an internship in ATLAS, one of the 4 major sub-detectors of the Large Hadron collider (LHC), CERN was like a dream come true. The year of 2020, I applied for a project position at the University of Geneva for the summer of 2021, and fortunately got selected! I started my work from the December of 2020. In this section I'll keep appending basically all of the Analysis techniques and methods I learn and perform for the entire duration of the project :)</summary></entry><entry><title type="html">Jet Reconstruction</title><link href="/jet_reco/" rel="alternate" type="text/html" title="Jet Reconstruction" /><published>2021-03-15T10:48:59+05:30</published><updated>2021-03-15T10:48:59+05:30</updated><id>/JetReco</id><content type="html" xml:base="/jet_reco/">&lt;p&gt;This is the Data pipeline of CERN. All the data collected from the four major detectors ATLAS, CMS, ALICE and LHCb first undergo an online event selection, before being stored.
+This raw data enters into the jet reconstruction process, where these are converted into analytically more useful information. This is kind of an offline selection to the data. 
+This data then is ready to be analysed for the search and validations to be performed by the physicists.&lt;br /&gt;
+&lt;img src=&quot;https://alookanalytics.files.wordpress.com/2018/10/cern_swan.png?w=600&quot; /&gt;
+&lt;br /&gt;&lt;br /&gt;
+In this blog post I intend to draw a rough picture of the reconstruction of jets as performed by ATLAS and CMS, with slight bias on algorithms used by ATLAS. However, the general
+procedure is almost the same in both of these collaborations. Before getting into jet reconstruction, it is important to understand, what are &lt;a href=&quot;https://en.wikipedia.org/wiki/Jet_(particle_physics)&quot;&gt;jets&lt;/a&gt; ? Jets are actually ‘tools’ that 
+represent hadronic showers in a detector. They are not real objects, rather represent hadronization of quarks and gluons. We classify jets as:&lt;/p&gt;
+&lt;ul&gt;&lt;li&gt;&lt;b&gt;Small R jets:&lt;/b&gt; These are jets with R=0.4. They originate from quarks and gluons.&lt;/li&gt;&lt;li&gt;&lt;b&gt;Large R jets:&lt;/b&gt; These are jets with R=1.0 for ATLAS and 0.8
+for CMS. They originate from more complex objects such as hadronically decaying W/Z bosons, or top quark, etc.&lt;/li&gt;&lt;/ul&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;h3&gt;Basic Steps of Jet Reconstruction&lt;/h3&gt;
+&lt;p&gt;The process of jet reconstruction somewhat varies to a definite degree for different collaborations. But the underlying processes are almost always the same. As specified before,
+this page has a bias on the method followed by ATLAS Collaboration. 
+&lt;br /&gt;&lt;/p&gt;
+&lt;h4&gt;&lt;b&gt;Understanding Detector and Pileup&lt;/b&gt;&lt;/h4&gt;
+&lt;p&gt;&lt;br /&gt;
+&lt;img align=&quot;left&quot; src=&quot;https://stanford.edu/group/stanford_atlas/pictures/collision/detector.jpg&quot; alt=&quot;drawing&quot; style=&quot;width:695px;&quot; /&gt;&lt;br /&gt;
+&lt;br /&gt;Before we move on to the section of Pileup Mitigation, it is important to understant our detector structure.&lt;br /&gt;
+The ATLAS detector provides nearly full solid angle coverage around the collision point with an inner tracking system covering the pseudorapidity1 range &lt;math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;&gt;&lt;mrow class=&quot;MJX-TeXAtom-ORD&quot;&gt;&lt;mo stretchy=&quot;false&quot;&gt;|&lt;/mo&gt;&lt;/mrow&gt;&lt;mi&gt;&amp;#x03B7;&lt;!-- η --&gt;&lt;/mi&gt;&lt;mrow class=&quot;MJX-TeXAtom-ORD&quot;&gt;&lt;mo stretchy=&quot;false&quot;&gt;|&lt;/mo&gt;&lt;/mrow&gt;&lt;mo&gt;&amp;lt;&lt;/mo&gt;&lt;mn&gt;2.5&lt;/mn&gt;&lt;/math&gt;, electromagnetic (EM) and hadronic calorimeters
+covering &lt;math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;&gt;&lt;mrow class=&quot;MJX-TeXAtom-ORD&quot;&gt;&lt;mo stretchy=&quot;false&quot;&gt;|&lt;/mo&gt;&lt;/mrow&gt;&lt;mi&gt;&amp;#x03B7;&lt;!-- η --&gt;&lt;/mi&gt;&lt;mrow class=&quot;MJX-TeXAtom-ORD&quot;&gt;&lt;mo stretchy=&quot;false&quot;&gt;|&lt;/mo&gt;&lt;/mrow&gt;&lt;mo&gt;&amp;lt;&lt;/mo&gt;&lt;mn&gt;4.9&lt;/mn&gt;&lt;/math&gt;, and a muon spectrometer covering &lt;math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;&gt;&lt;mrow class=&quot;MJX-TeXAtom-ORD&quot;&gt;&lt;mo stretchy=&quot;false&quot;&gt;|&lt;/mo&gt;&lt;/mrow&gt;&lt;mi&gt;&amp;#x03B7;&lt;!-- η --&gt;&lt;/mi&gt;&lt;mrow class=&quot;MJX-TeXAtom-ORD&quot;&gt;&lt;mo stretchy=&quot;false&quot;&gt;|&lt;/mo&gt;&lt;/mrow&gt;&lt;mo&gt;&amp;lt;&lt;/mo&gt;&lt;mn&gt;2.7&lt;/mn&gt;&lt;/math&gt;.
+&lt;br /&gt;&lt;br /&gt;The ATLAS &lt;b&gt;tracking system&lt;/b&gt; is composed of a silicon pixel tracker closest to the beamline, a microstrip silicon tracker, and a straw-tube transition radiation tracker. These systems are layered radially around each other in the central region. A thin solenoid surrounding the tracker provides an axial 2T field enabling measurement of charged-particle momenta.
+&lt;br /&gt; The calorimeter is comprised of multiple subdetectors with different designs. The high granularity liquid argon (LAr) &lt;b&gt;electromagnetic calorimeter&lt;/b&gt; system includes 
+separate barrel, endcap, and forward subsystems. The tile &lt;b&gt;hadronic calorimeter&lt;/b&gt; is composed of scintillator tiles and iron absorbers. The final layer is a &lt;b&gt;toroid muon 
+spectrometer (MS)&lt;/b&gt; that tracks muons. Generally, we use jets having  &lt;math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;&gt;&lt;mrow class=&quot;MJX-TeXAtom-ORD&quot;&gt;&lt;mo stretchy=&quot;false&quot;&gt;|&lt;/mo&gt;&lt;/mrow&gt;&lt;mi&gt;&amp;#x03B7;&lt;!-- η --&gt;&lt;/mi&gt;&lt;mrow class=&quot;MJX-TeXAtom-ORD&quot;&gt;&lt;mo stretchy=&quot;false&quot;&gt;|&lt;/mo&gt;&lt;/mrow&gt;&lt;mo&gt;&amp;lt;&lt;/mo&gt;&lt;mn&gt;2.8&lt;/mn&gt;&lt;/math&gt; such that they are fully contained within 
+the barrel and endcap calorimeter systems.
+&lt;br /&gt;&lt;br /&gt; Now, once we are done with understanding detetctor structure of ATLAS, we’ll head towards what is pileup, and how do we get rid of them. There are many 
+p-p collisions taking place simultaneously, and within small interval of time at the Large Hadron Collider, so as to get more and more data. But multiple interactions 
+in the same bunch crossings, and multiple bunch crossings within small time interval increases pileup. Pile-up contributes to the detector signals from the 
+collision environment, and is especially important for higher-intensity operations of the LHC. The figure below represents a typical LHC event. Each blob that we see is a reconstructed
+primary vertex (‘point of collision of two protons’). However each of them is not a hard scatter (deep inelastic collisions with high energy) vertex. &lt;br /&gt;&lt;br /&gt;
+&lt;img align=&quot;left&quot; src=&quot;/assets/images/2.png&quot; alt=&quot;drawing&quot; style=&quot;width:800px;&quot; /&gt;&lt;br /&gt;Hence, pileup can be of two major types:&lt;/p&gt;
+&lt;ul&gt;&lt;li&gt;&lt;b&gt;In Time pileup (IT):&lt;/b&gt; This contribution arises from the additional proton–proton (pp) collisions occurring in the same bunch crossing as the hard-scatter interaction (deep inelastic collisions with high energy).&lt;/li&gt;
+&lt;li&gt;&lt;b&gt;Out Of Time pileup (OOT):&lt;/b&gt; This is the pile-up from signal remnants in the ATLAS calorimeters from the energy deposits in other bunch crossings.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;While pileup directly cannot be measured, it can be correlated to many directly measurable quantities, such as &lt;b&gt;average number of collisions per bunch crossing (&lt;math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;&gt;&lt;mi&gt;&amp;#x03BC;&lt;!-- μ --&gt;&lt;/mi&gt;&lt;/math&gt;)&lt;/b&gt;, or 
+&lt;b&gt;The observed number of collisions in a single event (&lt;math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;&gt;&lt;mi&gt;N&lt;/mi&gt;&lt;msub&gt;&lt;mrow class=&quot;MJX-TeXAtom-ORD&quot;&gt;&lt;mi&gt;P&lt;/mi&gt;&lt;mi&gt;V&lt;/mi&gt;&lt;/mrow&gt;&lt;/msub&gt;&lt;/math&gt;)&lt;/b&gt;, also known as Number of primary Vertices.
+Since in time pileup arise from simultaneous collisions in one buch crossing, NPV can be thought as a measure of IT. On the other hand Out of time pileups arise from 
+remenants of signal in subsequent or previous collisions, &lt;math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;&gt;&lt;mi&gt;&amp;#x03BC;&lt;!-- μ --&gt;&lt;/mi&gt;&lt;/math&gt; can be thought of as a measure of OOT pileup. Now, at this point a question might bug us that
+why should previous/subsequent collisions matter? It is if detector readout time is larger than the space between subsequent bunch crossings, previous, or subsequent events can overlap with current events
+, hence giving a wrong reconstruction. Generally, calorimeters have a longer readout, but the tracking systems have a shorter readout time. &lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;h4&gt;&lt;b&gt;Building inputs to jet Reconstruction&lt;/b&gt;&lt;/h4&gt;
+&lt;p&gt;So, in a detector, jets are a complex mixture of visible signals. Individual charged particles (which comprise of ~2/3 rd of the jets) appear in the tracker, wheras Charged and neutral particles (~1/3rd of the jets) appear together (but not distinguishable) in the calorimeter.
+So, calorimeter energy deposit is the key to jet reconstruction. But the calorimeter is succeptible to a lot of pileup as we saw previously. So, the we need to design some calorimeter objects
+in order to  reduce pileup effects, within limits.
+&lt;br /&gt;&lt;br /&gt;
+&lt;img align=&quot;right&quot; src=&quot;/assets/images/topo.png&quot; alt=&quot;drawing&quot; style=&quot;border:1px solid black;&quot; width=&quot;300&quot; /&gt;
+Clusters of calorimeter energy are classic objects for Jet  Reconstruction! The lateral and longitudinal segmentation of the calorimeters permits three-dimensional reconstruction 
+of particle showers, implemented in the topological clustering algorithm. Topo-clusters of calorimeter cells are seeded by cells whose absolute energy measurements |E| exceed 
+the expected noise (the expected noise includes both electronic noise and the average contribution from pile-up, which depends on the run 
+conditions)by four times its standard deviation. The topo-clusters are then expanded both laterally and longitudinally in two steps, first by iteratively adding all adjacent cells with absolute energies two standard 
+deviations above noise, and finally adding all cells neighbouring the previous set, just to catch the tail of the distributions. FOrmation of calorimeter topocluster reduces pileup
+to certain dergree. Nonetheless, pileup still impacts clusters. Eg: If pileup and hard scatter directly overlap, their energies are combined, changing the measured cluster energy. Also
+pileup can create separate topoclusters. &lt;br /&gt;
+So, what about tracks? Do they give us proper jet reconstruction? Althought tracks are “inherently” pileup stable, tracks give an idea about only ~2/3rd
+of the jet energy. The other thing is that tracks can give precise idea about energy and momentum of a charged particle only at low p&lt;sub&gt;T&lt;/sub&gt;. This is because, 
+at high p&lt;sub&gt;T&lt;/sub&gt;, the ability to measure track curvature degrades. On the other hand, Calorimeters are sensitive to high energy deposits, and relatively insensitive to low energy deposits.
+&lt;br /&gt;Hence, neither tracks, nor calo clusters can form a good reconstruction object. So, we combine the information from both these to reconnstruct our jets. We can thus consider mixtures of tracks and calorimeter clusters.
+This requires matching tracks to clusters so we don’t double-count energy. Once we have matched track(s) to a cluster, we check if their measurements are consistent. If they are consistent, the cluster likely corresponds to only charged particle(s)
+, else the cluster likely corresponds to overlapping charged and neutral particles. This process is typically called &lt;b&gt;“particle flow” or (PFlow)&lt;/b&gt;. Once again particle 
+flow is very detector-specifc, and each collaboration has their own algorithm, but the general idea and approach follows the above mentality. The figure below beautifully illustrates 
+the way the PFlow algorithm works.
+&lt;br /&gt;&lt;br /&gt;
+&lt;img src=&quot;/assets/images/PFlow.png&quot; alt=&quot;drawing&quot; style=&quot;border:2px solid black;&quot; /&gt;&lt;/p&gt;</content><author><name>Snigdho Chakraborty</name><email>snigdho.chakraborty@gmail.com</email></author><category term="ATLAS" /><category term="blogs" /><summary type="html">This is the Data pipeline of CERN. All the data collected from the four major detectors ATLAS, CMS, ALICE and LHCb first undergo an online event selection, before being stored. This raw data enters into the jet reconstruction process, where these are converted into analytically more useful information. This is kind of an offline selection to the data. This data then is ready to be analysed for the search and validations to be performed by the physicists. In this blog post I intend to draw a rough picture of the reconstruction of jets as performed by ATLAS and CMS, with slight bias on algorithms used by ATLAS. However, the general procedure is almost the same in both of these collaborations. Before getting into jet reconstruction, it is important to understand, what are jets ? Jets are actually ‘tools’ that represent hadronic showers in a detector. They are not real objects, rather represent hadronization of quarks and gluons. We classify jets as: Small R jets: These are jets with R=0.4. They originate from quarks and gluons.Large R jets: These are jets with R=1.0 for ATLAS and 0.8 for CMS. They originate from more complex objects such as hadronically decaying W/Z bosons, or top quark, etc.</summary></entry></feed>

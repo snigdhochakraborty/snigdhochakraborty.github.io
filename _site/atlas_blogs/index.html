@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Supersymmetry in ATLAS | Physicophilia</title>
+<meta name="generator" content="Jekyll v4.2.0" />
+<meta property="og:title" content="Supersymmetry in ATLAS" />
+<meta name="author" content="Snigdho Chakraborty" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="My journey to ATLAS-2021 Getting an internship in ATLAS, one of the 4 major sub-detectors of the Large Hadron collider (LHC), CERN was like a dream come true. The year of 2020, I applied for a project position at the University of Geneva for the summer of 2021, and fortunately got selected! I started my work from the December of 2020. In this section I&#39;ll keep appending basically all of the Analysis techniques and methods I learn and perform for the entire duration of the project :)" />
+<meta property="og:description" content="My journey to ATLAS-2021 Getting an internship in ATLAS, one of the 4 major sub-detectors of the Large Hadron collider (LHC), CERN was like a dream come true. The year of 2020, I applied for a project position at the University of Geneva for the summer of 2021, and fortunately got selected! I started my work from the December of 2020. In this section I&#39;ll keep appending basically all of the Analysis techniques and methods I learn and perform for the entire duration of the project :)" />
+<link rel="canonical" href="/atlas_blogs/" />
+<meta property="og:url" content="/atlas_blogs/" />
+<meta property="og:site_name" content="Physicophilia" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-05-22T10:48:59+05:30" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Supersymmetry in ATLAS" />
+<script type="application/ld+json">
+{"@type":"BlogPosting","headline":"Supersymmetry in ATLAS","dateModified":"2021-05-22T10:48:59+05:30","datePublished":"2021-05-22T10:48:59+05:30","url":"/atlas_blogs/","author":{"@type":"Person","name":"Snigdho Chakraborty"},"mainEntityOfPage":{"@type":"WebPage","@id":"/atlas_blogs/"},"description":"My journey to ATLAS-2021 Getting an internship in ATLAS, one of the 4 major sub-detectors of the Large Hadron collider (LHC), CERN was like a dream come true. The year of 2020, I applied for a project position at the University of Geneva for the summer of 2021, and fortunately got selected! I started my work from the December of 2020. In this section I&#39;ll keep appending basically all of the Analysis techniques and methods I learn and perform for the entire duration of the project :)","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="/feed.xml" title="Physicophilia" />
+</head>
+<body style="background-color:WhiteSmoke"><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">Physicophilia</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/about/" style="color:OrangeRed; font-weight:bold">About</a><a class="page-link" href="/partphy/" style="color:OrangeRed; font-weight:bold">Particle Physics</a><a class="page-link" href="/qft/" style="color:OrangeRed; font-weight:bold">Quantum Field Theory</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Supersymmetry in ATLAS</h1>
+    <p class="post-meta"><time class="dt-published" datetime="2021-05-22T10:48:59+05:30" itemprop="datePublished">
+        May 22, 2021
+      </time></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <h3>My journey to ATLAS-2021</h3>
+<p>Getting an internship in ATLAS, one of the 4 major sub-detectors of the Large Hadron collider (LHC), CERN was like a dream come true. The year of 2020, I applied for a project position
+at the University of Geneva for the summer of 2021, and fortunately got selected! I started my work from the December of 2020.</p>
+<p>In this section I'll keep appending basically all of the <b>Analysis</b> techniques and methods I learn and perform for the entire duration of the project :)</p>
+
+<h3>R-Parity Violation Supersymmetry Analysis in ATLAS</h3>
+<p>I have discussed about Supersymmetry in the <a href="http://127.0.0.1:4000/partphy/"><b>Particle Physics</b></a> section! Here I’ll discuss about R-parity violation coupling and the analysis work
+and strategies that I am learning and following for this ATLAS project of 2020-2021.</p>
+
+<h4>The signal model</h4>
+<p><img align="left" src="/assets/images/fig_01a-1.png" alt="drawing" style="width:200px;" /> This is our signal model, also known as the 6-jet model. The feynman diagram adjoining clearly specifies that there is a 
+gluino pair production via R-parity conservation coupling, since a Standard model particle must have produced a pair of SUSY particle. Each of these gluinos now decay into a three quarks via <b>R-paity 
+violation coupling</b>. So, in each event, there are six quarks produced, that hadronize to produce <a href="https://en.wikipedia.org/wiki/Jet_(particle_physics)">jets</a> (which are basically spray of particles that hit the detector).</p>
+
+<p><br /><br /></p>
+
+<h4>Why did we traget gluino pair production? </h4>
+<p><img align="right" src="/assets/images/gg.jpg" alt="drawing" style="width:300px;" /> Production cross-sections (which can be considered as a ‘measure’ of probability that the process shall occur)
+at the LHC are shown in the adjoining figure as a function of the sparticle mass. As expected the pair production of gluinos dominates the SUSY production for a given mass
+scale, followed by the production of squarks, elecroweakinos, sleptons, and sneutrinos. This is exactly why we target gluino pair production. The fist signatures of SUSY is more probable to show up
+via gluino pair production.</p>
+<p> A valid question to ask is <b>why didn't we observe a SUSY event so far?</b> The answer to this is, lack of statistics! Supersymmetry processes are very rare, they occur with
+much lower crossection than the Standard Model processes, hence small statistics ensures masking of the signal (in our case any SUSY process) by the much more probable background processes (the Standard Model Processes).</p>
+
+<p><br /><br /></p>
+<h4>Backgrounds for our signal model?</h4>
+<p>Our signal model concerns Gluino pair production decaying via R-parity violation coupling in all hadronic final states. So, the background must contain those processes that have all hadronic final states too.
+The first and the most important background for this is: <b>QCD Multijet Background</b>, since at a hadron collider the production of multijets through QCD interaction is the highest cross-section SM process.
+The other fairy important backgrounds involve <math xmlns="http://www.w3.org/1998/Math/MathML"><mi>t</mi><mrow class="MJX-TeXAtom-ORD"><mover><mi>t</mi><mo stretchy="false">&#x00AF;<!-- ¯ --></mo></mover></mrow></math> events, single top, and W/Z + jets.</p>
+
+<p>When we model a background we generally rely on Monte Carlo simulations. But with QCD it is harder, because the processes have huge cross sections so no matter how much CPU we put at work to simulate the events, we almost always end up with too few 
+good events to do a proper modeling job. But this is not the case for other major backgrounds, like the once discussed above. So how do we go with modelling our QCD background?</p>
+
+<p><br /><br /></p>
+<h4>Data Driven Background Estimation</h4>
+<p>One solution to the problem that I raised in the previous section is what is popularly known as <b>“Data Driven Background Estimation”</b>. What this means is that we estimate the background
+from the data itself, without relying on our Monte Carlo. Now at first it might seem to be very weird, as in how do we know if our data contains signal or not alongside backgroud? The answer to this is quite simple. We define three main regions in our data,
+the control region, the validation region, and the signal region. What we do is basically define the control region such that the probability of finding the signal there is negligibly small, so this region is ‘devoid’ of signal, and contains mainly the background. We extrapolate this
+‘background yield’ into our signal region and this gives us the background estimate there! But the process isn’t as easy as it seems. The calculation and estimation of the extrapolating factor in this case is quite a job. In some cases
+this factor is derived from Monte Carlo, while in others its derived from the data itself. The former is not a fully ‘data driven process’ and depends on our Monte Carlo parameters, while the later is a completely data driven and a ‘better method’ for background estimation.</p>
+
+<p><br /><br /></p>
+<h4>Updates from recent ATLAS and CMS on data driven methods</h4>
+<ul>
+<li>Jet Counting Method</li>
+<li>Jet Mass Template Method</li>
+<li>Two Hemisphere Method</li>
+<li>Jet Mass Spectrum Method</li>
+</ul>
+
+  </div><a class="u-url" href="/atlas_blogs/" hidden></a>
+  
+  <div class="PageNavigation">
+  
+    <a class="prev" href="/jet_reco/">&laquo; Jet Reconstruction</a>
+  
+  
+</div>
+
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col">
+        <p class="feed-subscribe">
+          <a href="/feed.xml">
+            <svg class="svg-icon orange">
+              <use xlink:href="/assets/minima-social-icons.svg#rss"></use>
+            </svg><span>Subscribe</span>
+          </a>
+        </p>
+        <ul class="contact-list">
+          <li class="p-name">Snigdho Chakraborty</li>
+          <li><a class="u-email" href="mailto:snigdho.chakraborty@gmail.com">snigdho.chakraborty@gmail.com</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <p>This website is dedicated to all those enthusiastic young minds that like to learn about particle physics, but feel lost. I target a wide range of students and educationists to provide them with an easy access to  knowledge :)</p>
+      </div>
+    </div>
+
+    <div class="social-links"><ul class="social-media-list"></ul>
+</div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>
