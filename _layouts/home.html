@@ -9,7 +9,7 @@ layout: default
 
   {{ content }}
 
-
+<img  align="right" src="https://www.symmetrymagazine.org/sites/default/files/images/standard/Inline_Dark_sector.gif" alt="drawing">
   {% if site.paginate %}
     {% assign posts = paginator.posts %}
   {% else %}
@@ -19,7 +19,7 @@ layout: default
     {%- if page.list_title -%}
       <h2 class="post-list-heading">{{ page.list_title }}</h2>
     {%- endif -%}
-	<img  align="right" src="https://www.symmetrymagazine.org/sites/default/files/images/standard/Inline_Dark_sector.gif" alt="drawing">
+	
 
 	<ul class="post-list">
       {%- assign date_format = site.minima.date_format | default: "%b %-d, %Y" -%}
