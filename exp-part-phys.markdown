@@ -12,7 +12,7 @@ Amongst these dying hopes I passed almost an year. I joined several workshops ju
 <br><br>
 2020, the year of the pandemic. My hopes were high and so was my determination. I learnt to write a decent CV, I learnt to hunt for opportunities. I applied for an internship at the University of Geneva, Switzerland. It was an ATLAS project. After an interview I was finaly selected and that was probably the happiest moments of my life. 
 <br><br>
-5th of March, 2021 I got registered with my own CERN email-id and computing account. With smal dreams coming true, it was exciting for me. Now when I think of it, it seems these were dreams that Shalini taught me to dream. Small milestones, big happiness:) 
+5th of March, 2021 I got registered with my own CERN email-id and computing account. With small dreams coming true, it was exciting for me. Now when I think of it, it seems these were dreams that Shalini taught me to dream. Small milestones, big happiness:) 
 <br><br>
 This page of mine is targetted to the people who are still lost and donot know a way to figure out what to do! Its a way of inspiring new minds to get into Particle Physics. Its a gesture to pass on what I recieved from Shalini.
 
